@@ -28,17 +28,17 @@ const SearchResultCard = ({ searchData }) => {
   };
 
   return (
-    <div className="flex gap-4 p-4 pl-10 overflow-x-visible">
+    <div className="flex justify-center flex-wrap gap-5">
       {searchData?.map((product, index) => (
         <div
           key={index}
-          className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300  w-[200px] flex flex-col justify-between "
+          className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300  w-[180px] flex flex-col justify-between "
         >
           <div className="relative h-[100px]">
             <img
               src={product.imageUrl}
               alt={product.name}
-              className="w-full h-28 object-contain "
+              className="w-full h-28 object-cover "
             />
           </div>
 
@@ -48,11 +48,11 @@ const SearchResultCard = ({ searchData }) => {
             </h3>
             <p className="text-gray-600 mb-2">{product.description}</p>
             <div className="flex justify-between items-center ">
-              <span className="text-sm font-bold text-gray-500">
+              <span className="text-sm font-bold text-[#5b1676]">
                 Multiply price
               </span>
               <span className="text-sm font-bold text-[#000000d9]">
-                ${product.price}
+                ₹{product.price}
               </span>
             </div>
             <ComparePrices productName={product.name} />
@@ -65,7 +65,7 @@ const SearchResultCard = ({ searchData }) => {
                 Add to Cart
               </button>
             ) : (
-              <div className="flex items-center justify-between bg-gray-100 p-2 rounded-md">
+              <div className="flex items-center justify-between bg-gray-100 p-2 rounded-md mt-2 ">
                 <button
                   onClick={() => handleQuantityChange("decrease", product)}
                   className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300"

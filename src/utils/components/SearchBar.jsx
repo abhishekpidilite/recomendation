@@ -32,8 +32,8 @@ export default function SearchBar({ handleSearch }) {
   };
 
   const startVoiceRecognition = () => {
-    if (!('webkitSpeechRecognition' in window)) {
-      alert('Voice recognition is not supported in this browser.');
+    if (!("webkitSpeechRecognition" in window)) {
+      alert("Voice recognition is not supported in this browser.");
       return;
     }
 
@@ -52,7 +52,7 @@ export default function SearchBar({ handleSearch }) {
     };
 
     recognition.onerror = (event) => {
-      console.error('Speech recognition error:', event.error);
+      console.error("Speech recognition error:", event.error);
       setIsListening(false);
     };
 
@@ -72,14 +72,14 @@ export default function SearchBar({ handleSearch }) {
         onChange={(e) => setSearchText(e.target.value)}
         InputProps={{
           startAdornment: (
-            <SearchOutlined sx={{ color: "white", marginRight: "8px" }} />
+            <SearchOutlined sx={{ color: "gray", marginRight: "8px" }} />
           ),
           endAdornment: (
-            <IconButton 
+            <IconButton
               onClick={startVoiceRecognition}
-              sx={{ 
-                color: isListening ? 'red' : 'white',
-                '&:hover': { color: isListening ? 'red' : 'gray' }
+              sx={{
+                color: isListening ? "red" : "gray",
+                "&:hover": { color: isListening ? "red" : "gray" },
               }}
             >
               <MicIcon />
@@ -89,13 +89,13 @@ export default function SearchBar({ handleSearch }) {
         sx={{
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
-              borderColor: "white",
+              borderColor: "black",
             },
             "&:hover fieldset": {
-              borderColor: "white",
+              borderColor: "black",
             },
             "& input": {
-              color: "white",
+              color: "black",
             },
             "& input::placeholder": {
               color: "rgba(255, 255, 255, 0.7)",
@@ -103,7 +103,7 @@ export default function SearchBar({ handleSearch }) {
             },
           },
           "& .MuiInputLabel-root": {
-            color: "white",
+            color: "gray",
           },
         }}
         onKeyDown={(e) => {

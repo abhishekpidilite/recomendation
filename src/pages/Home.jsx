@@ -7,6 +7,7 @@ import ProductCard from "../utils/components/ProductCard";
 import { CircularProgress } from "@mui/material";
 import { useSearch } from "../api/search";
 import SearchResultCard from "../utils/components/SearchResultCard";
+import CascadeLoader from "../utils/components/loader";
 
 // Sample product data with badges and categories
 
@@ -42,27 +43,27 @@ const Home = () => {
 
   //navbar
   return (
-    <div className="p-4 bg-[#360133] flex flex-col min-h-screen w-screen">
+    <div className="p-4 bg-gray-100 flex flex-col min-h-screen w-screen">
       <Navbar1
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
         isCartOpen={isCartOpen}
         setIsCartOpen={setIsCartOpen}
       />
-      <div className="flex  justify-center items-center w-full py-10  ">
+      <div className="flex  justify-center items-center w-full py-5 pt-10  ">
         <SearchBar handleSearch={handleSearch} />
       </div>
 
       {isSearchLoading && (
         <div className="flex justify-center items-center w-full pb-10">
-          <CircularProgress className=" text-white" />
+          <CascadeLoader />
         </div>
       )}
 
       {searchData?.data?.products?.length > 0 && (
         <>
-          <div className="flex flex-col gap-4">
-            <p className="text-2xl font-bold text-white">Search Results</p>
+          <div className="flex flex-col gap-4 pb-2">
+            <p className="text-xl font-bold text-gray-600">Search Results</p>
           </div>
           {
             <div className="w-full flex items-center justify-center overflow-x-auto gap-4">
@@ -72,25 +73,25 @@ const Home = () => {
         </>
       )}
 
-      <div className="flex flex-col gap-4">
-        <p className="text-2xl font-bold text-white">Recommended Products</p>
-      </div>
+      {!searchData?.data?.products?.length > 0 && (
+        <>
+          <div className="flex flex-col gap-4 pb-2">
+            <p className="text-xl font-bold text-gray-600">
+              Recommended Products
+            </p>
+          </div>
 
-      <div className="w-full flex items-center justify-center overflow-x-auto gap-4">
-        {isRecommendedLoading ? (
-          <CircularProgress className="text-white" />
-        ) : (
-          <ProductCard recommendedData={recommendedData} />
-        )}
-      </div>
+          <div className="w-full flex items-center justify-center overflow-x-auto gap-4">
+            {isRecommendedLoading ? (
+              <CircularProgress className="text-white" />
+            ) : (
+              <ProductCard recommendedData={recommendedData} />
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
-
-  //sidebar
-
-  //main content
-
-  //footer
 };
 
 export default Home;
