@@ -27,7 +27,7 @@ const SideSheet = ({
           left: anchor === "left" ? "20px" : "auto",
           height: "95%",
           top: "20px",
-          maxWidth: width || 350,
+          maxWidth: width || 450,
           backgroundColor: "#FFFFFF",
         },
         "& .MuiDrawer-paper::-webkit-scrollbar": {
@@ -36,7 +36,7 @@ const SideSheet = ({
       }}
     >
       {title && (
-        <div className="p-3 md:p-6 flex justify-content-between items-center sticky top-0 bg-[--colorSurfaceSurfaceVar] z-2">
+        <div className="p-3 md:p-6 flex justify-between items-center sticky top-0 bg-[--colorSurfaceSurfaceVar] z-2">
           <div className="flex gap-2 align-items-center">
             {showBackButton && (
               <IconButton onClick={onClose}>

@@ -36,14 +36,14 @@ export const useProductRecommendations = (productId) => {
 };
 
 // Add product to cart
-export const useAddToCart = () => {
+export const usePlaceOrder = () => {
   const queryClient = useQueryClient();
   
   return useMutation({
-    mutationFn: async ({ productId, quantity }) => {
-      return fetchApi('/cart', {
+    mutationFn: async ({ orderDetails }) => {
+      return fetchApi('/v1/proponent/order/persist', {
         method: 'POST',
-        body: JSON.stringify({ productId, quantity }),
+        body: JSON.stringify( orderDetails ),
       });
     },
     onSuccess: () => {

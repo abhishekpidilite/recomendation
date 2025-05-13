@@ -14,7 +14,6 @@ const Home = () => {
   const username = localStorage.getItem("username");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [recommended, setRecommended] = useState([]);
 
   const {
     mutate: getRecommended,
