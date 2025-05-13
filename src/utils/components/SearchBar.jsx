@@ -2,9 +2,9 @@ import { TextField } from "@mui/material";
 import React from "react";
 import SearchOutlined from "@mui/icons-material/SearchOutlined";
 
-export default function SearchBar() {
-  const handleSearch = (e) => {
-    console.log(e.target.value);
+export default function SearchBar({ handleSearch }) {
+  const handleSeachOnEnter = (e) => {
+    handleSearch(e.target.value);
   };
   return (
     <div className="flex items-center w-full  my-2 h-full rounded-lg">
@@ -13,10 +13,7 @@ export default function SearchBar() {
         placeholder="Search"
         InputProps={{
           endAdornment: (
-            <SearchOutlined
-              sx={{ color: "white", cursor: "pointer" }}
-              onClick={handleSearch}
-            />
+            <SearchOutlined sx={{ color: "white", cursor: "pointer" }} />
           ),
         }}
         sx={{
@@ -37,7 +34,7 @@ export default function SearchBar() {
         }}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
-            handleSearch(e);
+            handleSeachOnEnter(e);
           }
         }}
       />

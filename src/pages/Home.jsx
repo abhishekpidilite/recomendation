@@ -4,6 +4,9 @@ import Navbar1 from "./components/Navbar1";
 import SearchBar from "../utils/components/SearchBar";
 import { useRecommended } from "../api/recommended";
 import ProductCard from "../utils/components/ProductCard";
+import { CircularProgress } from "@mui/material";
+import { useSearch } from "../api/search";
+import SearchResultCard from "../utils/components/SearchResultCard";
 
 // Sample product data with badges and categories
 
@@ -19,6 +22,17 @@ const Home = () => {
     isPending: isRecommendedLoading,
   } = useRecommended();
 
+  const {
+    mutate: getSearch,
+    data: searchData,
+    isPending: isSearchLoading,
+  } = useSearch();
+
+  const handleSearch = (productName) => {
+    console.log("productName", productName);
+    getSearch({ productName });
+  };
+
   const handleGetRecommended = () => {
     getRecommended({ username: username });
   };
@@ -26,8 +40,6 @@ const Home = () => {
   useEffect(() => {
     handleGetRecommended();
   }, []);
-
-  console.log("recommendedData", recommendedData);
 
   //navbar
   return (
@@ -39,8 +51,27 @@ const Home = () => {
         setIsCartOpen={setIsCartOpen}
       />
       <div className="flex  justify-center items-center w-full py-10  ">
-        <SearchBar />
+        <SearchBar handleSearch={handleSearch} />
       </div>
+
+      {isSearchLoading && (
+        <div className="flex justify-center items-center w-full pb-10">
+          <CircularProgress className=" text-white" />
+        </div>
+      )}
+
+      {searchData?.data?.products?.length > 0 && (
+        <>
+          <div className="flex flex-col gap-4">
+            <p className="text-2xl font-bold text-white">Search Results</p>
+          </div>
+          {
+            <div className="w-full flex items-center justify-center overflow-x-auto gap-4">
+              <SearchResultCard searchData={searchData.data.products} />
+            </div>
+          }
+        </>
+      )}
 
       <div className="flex flex-col gap-4">
         <p className="text-2xl font-bold text-white">Recommended Products</p>
@@ -48,7 +79,7 @@ const Home = () => {
 
       <div className="w-full flex items-center justify-center overflow-x-auto gap-4">
         {isRecommendedLoading ? (
-          <div>Loading...</div>
+          <CircularProgress className="text-white" />
         ) : (
           <ProductCard recommendedData={recommendedData} />
         )}
