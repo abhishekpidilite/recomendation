@@ -134,7 +134,7 @@ function Cart({ onClose }) {
         <div className="flex flex-col gap-2 mb-4">
           <div className="flex justify-between items-center">
             <span className="text-gray-600 font-medium">Total Amount:</span>
-            <span className="text-lg font-semibold text-[#360133]">₹{getTotalAmount()}</span>
+            <span className="text-lg font-semibold text-[#360133]">₹{getTotalAmount().toFixed(2)}</span>
           </div>
           {isLoading ? (
             <div className="flex justify-between items-center">

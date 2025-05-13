@@ -8,7 +8,6 @@ export const useComparePrice = () => {
         method: "POST",
         body: JSON.stringify({ productName: productName }),
       });
-      console.log("comparePriceData", data);
       return data;
     },
   });
