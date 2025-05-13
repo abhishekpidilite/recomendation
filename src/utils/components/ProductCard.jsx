@@ -1,0 +1,77 @@
+import React, { useState } from "react";
+
+const ProductCard = ({ recommendedData }) => {
+  const [quantity, setQuantity] = useState(1);
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
+
+  const handleAddToCart = () => {
+    setIsAddedToCart(true);
+  };
+
+  const handleQuantityChange = (action) => {
+    if (action === "increase") {
+      setQuantity((prev) => prev + 1);
+    } else if (action === "decrease" && quantity > 1) {
+      setQuantity((prev) => prev - 1);
+    }
+  };
+
+  return (
+    <div className="flex gap-4 p-4 overflow-x-visible">
+      {recommendedData?.data?.map((product, index) => (
+        <div
+          key={index}
+          className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300  w-[200px] flex flex-col justify-between "
+        >
+          <div className="relative h-[200px]">
+            <img
+              src={product.imageUrl}
+              alt={product.name}
+              className="w-full h-48 object-cover "
+            />
+          </div>
+
+          <div className="p-4">
+            <h3 className="text-sm font-semibold text-gray-800 mb-2">
+              {product.name}
+            </h3>
+            <p className="text-gray-600 mb-2">{product.description}</p>
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-xl font-bold text-[#360133]">
+                ${product.price}
+              </span>
+              <span className="text-sm text-gray-500">{product.category}</span>
+            </div>
+
+            {!isAddedToCart ? (
+              <button
+                onClick={handleAddToCart}
+                className="w-full bg-[#360133] text-white py-2 px-4 rounded-md hover:bg-[#4a021f] transition-colors duration-300"
+              >
+                Add to Cart
+              </button>
+            ) : (
+              <div className="flex items-center justify-between bg-gray-100 p-2 rounded-md">
+                <button
+                  onClick={() => handleQuantityChange("decrease")}
+                  className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300"
+                >
+                  -
+                </button>
+                <span className="font-semibold">{quantity}</span>
+                <button
+                  onClick={() => handleQuantityChange("increase")}
+                  className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300"
+                >
+                  +
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default ProductCard;

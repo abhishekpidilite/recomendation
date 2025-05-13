@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { phoneRegex } from "../../utils/regex";
+import { phoneRegex } from "../utils/regex";
 import { useLogin } from "../api/auth";
 
 const OTP_LENGTH = 4;

@@ -36,14 +36,14 @@ const SideSheet = ({
       }}
     >
       {title && (
-        <div className="flex justify-between items-center sticky top-0 p-2 z-2 bg-white border-b border-gray-200">
-          <div className="flex gap-2 items-center">
+        <div className="p-3 md:p-6 flex justify-content-between items-center sticky top-0 bg-[--colorSurfaceSurfaceVar] z-2">
+          <div className="flex gap-2 align-items-center">
             {showBackButton && (
               <IconButton onClick={onClose}>
                 <ArrowBack className="text-[--textSecondarySecondary]" />
               </IconButton>
             )}
-            <p className="text-lg font-medium">{title}</p>
+            <p className="m3-title-large">{title}</p>
           </div>
           <IconButton onClick={onClose}>
             <Close className="text-[--textSecondarySecondary]" />
