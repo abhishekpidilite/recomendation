@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./index.css";
 
 import {
   BrowserRouter as Router,

@@ -2,8 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import LunchDiningOutlinedIcon from "@mui/icons-material/LunchDiningOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import SideSheet from "../../../utils/components/Sidesheet";
 import Cart from "./Cart";
+import SideSheet from "../../utils/components/Sidesheet";
 
 export default function Navbar1({
   isSidebarOpen,
