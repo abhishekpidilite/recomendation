@@ -18,17 +18,17 @@ const SearchResultCard = ({ searchData }) => {
   };
 
   return (
-    <div className="flex gap-4 p-4 pl-10 overflow-x-visible">
+    <div className="flex justify-center flex-wrap gap-4">
       {searchData?.map((product, index) => (
         <div
           key={index}
-          className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300  w-[200px] flex flex-col justify-between "
+          className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300  w-[180px] flex flex-col justify-between "
         >
           <div className="relative h-[100px]">
             <img
               src={product.imageUrl}
               alt={product.name}
-              className="w-full h-28 object-contain "
+              className="w-full h-28 object-cover "
             />
           </div>
 
@@ -42,7 +42,7 @@ const SearchResultCard = ({ searchData }) => {
                 Multiply price
               </span>
               <span className="text-sm font-bold text-[#000000d9]">
-                ${product.price}
+                {product.price}
               </span>
             </div>
             <ComparePrices productName={product.name} />

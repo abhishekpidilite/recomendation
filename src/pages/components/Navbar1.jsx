@@ -5,6 +5,8 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Cart from "./Cart";
 import SideSheet from "../../utils/components/Sidesheet";
 
+import logo from "../../assets/logo.png";
+
 export default function Navbar1({
   isSidebarOpen,
   setIsSidebarOpen,
@@ -19,15 +21,17 @@ export default function Navbar1({
   };
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between items-center">
       <LunchDiningOutlinedIcon
-        className="text-white !w-8 !h-8 cursor-pointer"
+        className="text-gray-800 !w-8 !h-8 cursor-pointer"
         onClick={() => setIsSidebarOpen(true)}
       />
 
+      <img src={logo} alt="logo" className="w-[200px]" />
+
       <div className="relative">
         <ShoppingCartOutlinedIcon
-          className="text-white  !w-8 !h-8 cursor-pointer"
+          className="text-gray-800  !w-8 !h-8 cursor-pointer"
           onClick={() => setIsCartOpen(true)}
         />
         <div className="absolute top-[-7px] right-[-7px] bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">

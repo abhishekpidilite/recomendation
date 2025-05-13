@@ -13,23 +13,23 @@ export default function SearchBar({ handleSearch }) {
         placeholder="Search"
         InputProps={{
           endAdornment: (
-            <SearchOutlined sx={{ color: "white", cursor: "pointer" }} />
+            <SearchOutlined sx={{ color: "gray", cursor: "pointer" }} />
           ),
         }}
         sx={{
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
-              borderColor: "white",
+              borderColor: "black",
             },
             "&:hover fieldset": {
-              borderColor: "white",
+              borderColor: "black",
             },
             "& input": {
-              color: "white",
+              color: "black",
             },
           },
           "& .MuiInputLabel-root": {
-            color: "white",
+            color: "gray",
           },
         }}
         onKeyDown={(e) => {
