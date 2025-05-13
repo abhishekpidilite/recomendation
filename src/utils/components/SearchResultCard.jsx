@@ -10,8 +10,9 @@ const SearchResultCard = ({ searchData }) => {
   };
 
   const handleQuantityChange = (action, product) => {
-    const currentQuantity = cartItems.find(item => item.sku === product.sku)?.quantity || 0;
-    
+    const currentQuantity =
+      cartItems.find((item) => item.sku === product.sku)?.quantity || 0;
+
     if (action === "increase") {
       updateQuantity(product.sku, currentQuantity + 1);
     } else if (action === "decrease") {
@@ -20,11 +21,11 @@ const SearchResultCard = ({ searchData }) => {
   };
 
   const isInCart = (sku) => {
-    return cartItems.some(item => item.sku === sku);
+    return cartItems.some((item) => item.sku === sku);
   };
 
   const getQuantity = (sku) => {
-    return cartItems.find(item => item.sku === sku)?.quantity || 0;
+    return cartItems.find((item) => item.sku === sku)?.quantity || 0;
   };
 
   return (
@@ -60,7 +61,7 @@ const SearchResultCard = ({ searchData }) => {
             {!isInCart(product.sku) ? (
               <button
                 onClick={() => handleAddToCart(product)}
-                className="w-full bg-[#360133] text-white py-2 px-4 rounded-md hover:bg-[#4a021f] transition-colors duration-300"
+                className=" mt-2 w-full bg-[#360133] text-white py-2 px-4 rounded-md hover:bg-[#4a021f] transition-colors duration-300"
               >
                 Add to Cart
               </button>
@@ -72,7 +73,9 @@ const SearchResultCard = ({ searchData }) => {
                 >
                   -
                 </button>
-                <span className="font-semibold">{getQuantity(product.sku)}</span>
+                <span className="font-semibold">
+                  {getQuantity(product.sku)}
+                </span>
                 <button
                   onClick={() => handleQuantityChange("increase", product)}
                   className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300"
