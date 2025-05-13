@@ -1,19 +1,11 @@
-import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import { phoneRegex } from "../utils/regex";
 import { useLogin } from "../api/auth";
 
 const OTP_LENGTH = 4;
 
 const Login = () => {
-  const [countryCode, setCountryCode] = useState("+1");
   const [phone, setPhone] = useState("");
-  const [step, setStep] = useState("phone"); // 'phone' or 'otp'
-  const [otp, setOtp] = useState(Array(OTP_LENGTH).fill(""));
-  const [animating, setAnimating] = useState(false);
-  const navigate = useNavigate();
-  const otpRefs = useRef([]);
-
   const { mutate: login, isPending: isPending, isError: isError } = useLogin();
 
   const handlePhoneSubmit = (e) => {
@@ -37,15 +29,13 @@ const Login = () => {
   };
 
   return (
-    <div className=" flex justify-center items-center bg-[#360133] min-h-screen w-full">
-      <div
-        className={`login-box slide-${step}${animating ? " animating" : ""}`}
-      >
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#360133] to-[#4a0147] flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
         {isPending ? (
-          <div role="status">
+          <div className="flex justify-center items-center">
             <svg
               aria-hidden="true"
-              className="w-10 h-10 text-gray-200 animate-spin dark:text-gray-200 fill-blue-600"
+              className="w-12 h-12 text-white animate-spin"
               viewBox="0 0 100 101"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -59,32 +49,34 @@ const Login = () => {
                 fill="currentFill"
               />
             </svg>
-            <span className="sr-only">Loading...</span>
           </div>
         ) : (
-          <div className="w-full">
-            <h2 className="login-title">Login</h2>
-            <form onSubmit={handlePhoneSubmit}>
-              <div className="form-group phone-group">
-                <div className="phone-input-wrapper">
-                  <input
-                    id="phone"
-                    value={phone}
-                    onChange={handlePhoneInput}
-                    placeholder="Enter phone number"
-                    required
-                    className="rounded-lg p-4 border-[1px] border-gray-500 bg-gray-100 w-full"
-                  />
-                </div>
+          <div className="bg-white rounded-2xl shadow-xl p-8 space-y-6">
+            <h2 className="text-3xl font-bold text-center text-gray-800">Welcome Back</h2>
+            <p className="text-center text-gray-600">Please enter your phone number to continue</p>
+            
+            <form onSubmit={handlePhoneSubmit} className="space-y-6">
+              <div className="space-y-2">
+                <input
+                  id="phone"
+                  value={phone}
+                  onChange={handlePhoneInput}
+                  placeholder="Enter phone number"
+                  required
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#360133] focus:ring-2 focus:ring-[#360133]/20 outline-none transition-all duration-200"
+                />
               </div>
+              
               <button
                 disabled={phone.length !== 10}
                 type="submit"
-                className={`bg-[#360133] text-white rounded-lg p-4 w-full font-bold text-xl ${
-                  phone.length !== 10 ? "opacity-50 cursor-not-allowed" : ""
+                className={`w-full py-3 px-4 rounded-lg text-white font-semibold text-lg transition-all duration-200 ${
+                  phone.length !== 10 
+                    ? "bg-gray-400 cursor-not-allowed" 
+                    : "bg-[#360133] hover:bg-[#4a0147] shadow-lg hover:shadow-xl"
                 }`}
               >
-                Login
+                Continue
               </button>
             </form>
           </div>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./index.css";
+import { CartProvider } from "./context/CartContext";
 
 import {
   BrowserRouter as Router,
@@ -12,13 +13,15 @@ import Home from "./pages/Home";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/" element={<Navigate to="/login" replace />} />
-      </Routes>
-    </Router>
+    <CartProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </Router>
+    </CartProvider>
   );
 }
 

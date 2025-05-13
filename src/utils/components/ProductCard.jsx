@@ -1,19 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
+import { useCart } from "../../context/CartContext";
 
 const ProductCard = ({ recommendedData }) => {
-  const [quantity, setQuantity] = useState(1);
-  const [isAddedToCart, setIsAddedToCart] = useState(false);
+  const { addToCart, updateQuantity, cartItems } = useCart();
 
-  const handleAddToCart = () => {
-    setIsAddedToCart(true);
+  const handleAddToCart = (product) => {
+    addToCart(product, 1);
   };
 
-  const handleQuantityChange = (action) => {
+  const handleQuantityChange = (action, product) => {
+    const currentQuantity = cartItems.find(item => item.sku === product.sku)?.quantity || 0;
+    
     if (action === "increase") {
-      setQuantity((prev) => prev + 1);
-    } else if (action === "decrease" && quantity > 1) {
-      setQuantity((prev) => prev - 1);
+      updateQuantity(product.sku, currentQuantity + 1);
+    } else if (action === "decrease") {
+      updateQuantity(product.sku, currentQuantity - 1);
     }
+  };
+
+  const isInCart = (sku) => {
+    return cartItems.some(item => item.sku === sku);
+  };
+
+  const getQuantity = (sku) => {
+    return cartItems.find(item => item.sku === sku)?.quantity || 0;
   };
 
   return (
@@ -43,9 +53,9 @@ const ProductCard = ({ recommendedData }) => {
               <span className="text-sm text-gray-500">{product.category}</span>
             </div>
 
-            {!isAddedToCart ? (
+            {!isInCart(product.sku) ? (
               <button
-                onClick={handleAddToCart}
+                onClick={() => handleAddToCart(product)}
                 className="w-full bg-[#360133] text-white py-2 px-4 rounded-md hover:bg-[#4a021f] transition-colors duration-300"
               >
                 Add to Cart
@@ -53,14 +63,14 @@ const ProductCard = ({ recommendedData }) => {
             ) : (
               <div className="flex items-center justify-between bg-gray-100 p-2 rounded-md">
                 <button
-                  onClick={() => handleQuantityChange("decrease")}
+                  onClick={() => handleQuantityChange("decrease", product)}
                   className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300"
                 >
                   -
                 </button>
-                <span className="font-semibold">{quantity}</span>
+                <span className="font-semibold">{getQuantity(product.sku)}</span>
                 <button
-                  onClick={() => handleQuantityChange("increase")}
+                  onClick={() => handleQuantityChange("increase", product)}
                   className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300"
                 >
                   +
