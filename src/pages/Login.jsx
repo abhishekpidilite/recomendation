@@ -31,7 +31,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#360133] to-[#4a0147] flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen w-full bg-gradient-to-b from-[#360133] to-[#71026d] flex flex-col items-center justify-center p-4">
       <img
         src={logo}
         alt="logo"
