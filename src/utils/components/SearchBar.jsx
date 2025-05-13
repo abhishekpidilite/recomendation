@@ -1,11 +1,31 @@
 import { TextField, IconButton } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SearchOutlined from "@mui/icons-material/SearchOutlined";
 import MicIcon from "@mui/icons-material/Mic";
 
 export default function SearchBar({ handleSearch }) {
   const [isListening, setIsListening] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = useState(0);
+
+  const data = [
+    "Plywood",
+    "Hardware",
+    "Hinges",
+    "Laminate",
+    "MDF",
+    "Bedroom",
+    "Kitchen",
+    "Bathroom",
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPlaceholderIndex((prevIndex) => (prevIndex + 1) % data.length);
+    }, 2000); // Change placeholder every 2 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleSeachOnEnter = (e) => {
     handleSearch(e.target.value);
@@ -47,7 +67,7 @@ export default function SearchBar({ handleSearch }) {
     <div className="flex items-center w-full my-2 h-full rounded-lg">
       <TextField
         className="w-full"
-        placeholder="Search"
+        placeholder={searchText ? "" : `Search "${data[currentPlaceholderIndex]}"`}
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
         InputProps={{
@@ -76,6 +96,10 @@ export default function SearchBar({ handleSearch }) {
             },
             "& input": {
               color: "white",
+            },
+            "& input::placeholder": {
+              color: "rgba(255, 255, 255, 0.7)",
+              transition: "opacity 0.3s ease-in-out",
             },
           },
           "& .MuiInputLabel-root": {
