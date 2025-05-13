@@ -4,6 +4,7 @@ import LunchDiningOutlinedIcon from "@mui/icons-material/LunchDiningOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Cart from "./Cart";
 import SideSheet from "../../utils/components/Sidesheet";
+import { useCart } from "../../context/CartContext";
 
 export default function Navbar1({
   isSidebarOpen,
@@ -12,6 +13,7 @@ export default function Navbar1({
   setIsCartOpen,
 }) {
   const navigate = useNavigate();
+  const { getCartCount } = useCart();
 
   const handleLogout = () => {
     localStorage.removeItem("username");
@@ -30,9 +32,11 @@ export default function Navbar1({
           className="text-white  !w-8 !h-8 cursor-pointer"
           onClick={() => setIsCartOpen(true)}
         />
-        <div className="absolute top-[-7px] right-[-7px] bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
-          1
-        </div>
+        {getCartCount() > 0 && (
+          <div className="absolute top-[-7px] right-[-7px] bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+            {getCartCount()}
+          </div>
+        )}
       </div>
       <SideSheet
         anchor="left"
@@ -56,7 +60,7 @@ export default function Navbar1({
         title="Cart"
         showBackButton={false}
       >
-        <Cart />
+        <Cart onClose={() => setIsCartOpen(false)} />
       </SideSheet>
     </div>
   );
