@@ -98,7 +98,7 @@ export default function SearchBar({ handleSearch }) {
               color: "black",
             },
             "& input::placeholder": {
-              color: "rgba(255, 255, 255, 0.7)",
+              color: "gray",
               transition: "opacity 0.3s ease-in-out",
             },
           },
