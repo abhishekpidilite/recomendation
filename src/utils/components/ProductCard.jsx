@@ -9,8 +9,9 @@ const ProductCard = ({ recommendedData }) => {
   };
 
   const handleQuantityChange = (action, product) => {
-    const currentQuantity = cartItems.find(item => item.sku === product.sku)?.quantity || 0;
-    
+    const currentQuantity =
+      cartItems.find((item) => item.sku === product.sku)?.quantity || 0;
+
     if (action === "increase") {
       updateQuantity(product.sku, currentQuantity + 1);
     } else if (action === "decrease") {
@@ -19,15 +20,15 @@ const ProductCard = ({ recommendedData }) => {
   };
 
   const isInCart = (sku) => {
-    return cartItems.some(item => item.sku === sku);
+    return cartItems.some((item) => item.sku === sku);
   };
 
   const getQuantity = (sku) => {
-    return cartItems.find(item => item.sku === sku)?.quantity || 0;
+    return cartItems.find((item) => item.sku === sku)?.quantity || 0;
   };
 
   return (
-    <div className="flex justify-center flex-wrap gap-4">
+    <div className="flex  justify-around flex-wrap gap-y-4">
       {recommendedData?.data?.map((product, index) => (
         <div
           key={index}
@@ -68,7 +69,9 @@ const ProductCard = ({ recommendedData }) => {
                 >
                   -
                 </button>
-                <span className="font-semibold">{getQuantity(product.sku)}</span>
+                <span className="font-semibold">
+                  {getQuantity(product.sku)}
+                </span>
                 <button
                   onClick={() => handleQuantityChange("increase", product)}
                   className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full hover:bg-gray-300"

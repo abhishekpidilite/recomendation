@@ -16,6 +16,9 @@ const Home = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
+  const noResultText =
+    "No relevant categories found for search term: sadfsafdsafdsafsadfsadf";
+
   const {
     mutate: getRecommended,
     data: recommendedData,
@@ -71,6 +74,14 @@ const Home = () => {
             </div>
           }
         </>
+      )}
+
+      {searchData?.data?.suggestions[0]?.includes(
+        "No relevant categories found"
+      ) && (
+        <div className="flex justify-center items-center w-full pb-10">
+          <p className="text-xl font-bold text-gray-600">No products found</p>
+        </div>
       )}
 
       {!searchData?.data?.products?.length > 0 && (
