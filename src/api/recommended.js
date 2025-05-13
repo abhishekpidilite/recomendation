@@ -8,11 +8,7 @@ export const useRecommended = () => {
         method: "POST",
         body: JSON.stringify({ username: username, categoryId: categoryId }),
       });
-
       return data;
-    },
-    onSuccess: (data) => {
-      console.log("data", data);
     },
   });
 };
