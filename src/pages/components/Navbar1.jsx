@@ -23,7 +23,7 @@ export default function Navbar1({
   };
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center sticky top-0 bg-gray-100  z-50 shadow-md -mx-4 px-4">
       <LunchDiningOutlinedIcon
         className="text-gray-800 !w-8 !h-8 cursor-pointer"
         onClick={() => setIsSidebarOpen(true)}
@@ -50,7 +50,7 @@ export default function Navbar1({
         <div className="flex flex-col justify-end w-[300px] p-2 min-h-full">
           <button
             onClick={handleLogout}
-            className="mt-4 w-full py-2 px-3 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-colors"
+            className="mt-4 w-full py-2 px-3 bg-[#360133] text-white font-medium rounded-lg hover:bg-red-700 transition-colors"
           >
             Logout
           </button>
